@@ -28,6 +28,7 @@ class BaseTrainer(ABC):
         assert self.world_size == torch.distributed.get_world_size()
 
         self.device = torch.device('cuda:{}'.format(self.local_rank))
+        print('rank{}: device set.'.format(self.rank))
         torch.cuda.set_device(self.device)
 
         self.step = 0
