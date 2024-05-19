@@ -109,9 +109,9 @@ class CELEBA64(Dataset):
                 transforms.Normalize((0.5,), (0.5,), inplace=True)
             ])
 
-        with open(os.path.join(self.data_path, "list_attr_celeba.txt")) as f:
-            f.readline() # discard the top line
-            self.df = pd.read_csv(f, delim_whitespace=True)
+        # with open(os.path.join(self.data_path, "list_attr_celeba.txt")) as f:
+        #     f.readline() # discard the top line
+        #     self.df = pd.read_csv(f, delim_whitespace=True)
 
         self.id_to_label = [
             '5_o_Clock_Shadow', 'Arched_Eyebrows', 'Attractive', 'Bags_Under_Eyes',
