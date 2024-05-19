@@ -27,7 +27,8 @@ class BaseTrainer(ABC):
         self.world_size = self.distributed_meta_info["world_size"]
         assert self.world_size == torch.distributed.get_world_size()
 
-        self.device = torch.device('cuda:{}'.format(self.local_rank))
+        self.device = "cuda:0"
+        # self.device = torch.device('cuda:{}'.format(self.local_rank))
         torch.cuda.set_device(self.device)
 
         self.step = 0
