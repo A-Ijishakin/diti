@@ -47,7 +47,7 @@ def lerp(a,b,alpha):
 class Interp:
     def __init__(self, config, alpha_range, device, mask_tuple, f=1000, r=100):
         self.alpha_range = alpha_range
-        self.device = "cuda:0"
+        self.device = device
         torch.cuda.set_device(device)
         self.f, self.r = f, r
 

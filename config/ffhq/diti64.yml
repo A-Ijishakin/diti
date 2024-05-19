@@ -30,7 +30,7 @@ decoder_config:
 
 dataloader_config:
   num_workers: 4
-  batch_size: 128
+  batch_size: 64
 
 optimizer_config:
   lr: 1e-4
