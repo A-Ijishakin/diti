@@ -135,7 +135,7 @@ class HookHandler:
 class MaskedDiffusion:
     def __init__(self, config, device):
         super().__init__()
-        self.device=device
+        self.device="cuda:0"
         self.to_float = {"dtype": torch.float32, "device": device}  # common dtypes/devices for pre-computed constants
         self.timesteps = int(config["timesteps"])
         betas_type = config["betas_type"]

@@ -59,6 +59,7 @@ class Sampler(BaseSampler):
     def _build_model(self):
         config_path = self.config["config_path"]
         model_config = load_yaml(config_path)
+        self.device = "cuda:0"
         self.gaussian_diffusion = GaussianDiffusion(model_config["diffusion_config"], device=self.device)
 
         encoder = getattr(encoder_module, model_config["encoder_config"]["model"], None)(**model_config["encoder_config"])
