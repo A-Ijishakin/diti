@@ -1,27 +1,27 @@
+import torch 
+import torchvision.transforms as tfs 
+import numpy as np
+from glob import glob
+from PIL import Image 
+import os 
+from tqdm import tqdm 
+import pandas as pd
+
 
 class ImgLoader(torch.utils.data.Dataset):
-    def __init__(self, path='', starting_index=0, h_creation=False, ending_index=-1, 
-                 selected_indices=False, 
+    def __init__(self, dataset, h_creation=False, 
+                 size=512, 
                  device_num=0):
+
+        self.celeba = '/home/rmapaij/HSpace-SAEs/datasets/celeba/img_align_celeba'
+        self.ffhq = '/home/rmapaij/HSpace-SAEs/datasets/FFHQ/images'
+
+        self.size = size
+        path = self.celeba if dataset == 'celeba' else self.ffhq
         imgs = f'{path}/*'  
+
+        self.image_list = sorted(glob(imgs))
         
-        self.image_list = sorted(glob(imgs))[starting_index:ending_index] 
-        
-        if selected_indices:
-            loaded = []
-            
-            for latent in glob('/home/rmapaij/HSpace-SAEs/datasets/CELEB-A/h_seven/*'):
-                loaded.append(latent) 
-            
-            loaded = [f'{path}/{os.path.basename(latent).replace(".pt", ".jpg")}' for latent in loaded]     
-            
-            print('Loaded num:', len(loaded)) 
-            
-            for img in tqdm(loaded):
-                if img in self.image_list:
-                    self.image_list.remove(img)
-                    
-            print('Length after Pruning:', len(self.image_list)) 
         
         self.h_creation = h_creation 
         
@@ -52,7 +52,7 @@ class ImgLoader(torch.utils.data.Dataset):
         x = x.crop((left, top, right, bottom))
 
         # resize the image
-        x = x.resize((512, 512))      
+        x = x.resize((self.size, self.size))      
                 
         if self.transform is not None:
             x = self.transform(x) 
