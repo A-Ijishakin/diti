@@ -86,7 +86,7 @@ class Interp:
         self.image_index_1 = config["image_index_1"]
         self.image_index_2 = config["image_index_2"]
         data_1 = self.dataset.__getitem__(self.image_index_1)
-        x_0_1 = move_to_cuda(data_1["x_0"]).unsqueeze(0)
+        x_0_1 = move_to_cuda(data_1["x_0"], self.device).unsqueeze(0)
         # gt_1 = data_1["gt"]
 
         data_2 = self.dataset.__getitem__(self.image_index_2)
