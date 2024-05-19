@@ -13,9 +13,9 @@ from utils import load_yaml, init_process
 from pathlib import Path
 
 def run(rank, args, distributed_meta_info):
+    distributed_meta_info["rank"] = args.nr * args.gpus + rank
     rank = 1
     print("rank: ", rank)
-    distributed_meta_info["rank"] = args.nr * args.gpus + rank
     distributed_meta_info["local_rank"] = rank
     init_process(
         init_method=distributed_meta_info["init_method"],
