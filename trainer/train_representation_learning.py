@@ -65,7 +65,7 @@ if __name__ == '__main__':
     parser.add_argument('--master_addr', type=str, default="127.0.0.1")
     parser.add_argument('--master_port', type=str, default="7777")
     parser.add_argument('--method', type=str, default="pdae", help="pdae | diti")
-    parser.add_argument('--resume', action='store_true')
+    parser.add_argument('--resume', default=True)
     parser.add_argument('-n', '--nodes', default=1,
                         type=int, metavar='N')
     parser.add_argument('-g', '--gpus', default=1, type=int,
